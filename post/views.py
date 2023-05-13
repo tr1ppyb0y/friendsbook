@@ -1,7 +1,36 @@
+from typing import Any, Dict
+
 from django.http import HttpResponse
 from django.template import loader
-from .models import Post
+from django.views.generic import ListView
+
 from .forms import PostForm
+from .models import Post
+
+
+class PostList(ListView):
+    model = Post
+    paginate_by = 2
+    template_name = 'post_pagination.html'
+    ordering = 'id'
+
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super(PostList, self).get_context_data(**kwargs)
+        context['new_post_form'] = PostForm()
+        return context
+
+    def post(self, request):
+        form = PostForm(request.POST)
+        if form.is_valid():
+
+            new_post = Post.objects.create(
+                content = form.cleaned_data['content'],
+                author = request.user
+            )
+            new_post.save()
+        else:
+            print(form.errors)
+        return self.get(request)
 
 
 def post_feed(request):
