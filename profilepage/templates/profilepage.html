@@ -7,27 +7,34 @@
 
 <div class="profile" id="profile-{{profile.id}}">
     {% if own_profile %}
-        <a href="/useraccount/{{profile.user_account.id}}/edit">EDIT YOUR INFO</a>
+        <a href="/useraccount/{{profile.subject.id}}/edit">EDIT YOUR INFO</a>
     {% endif %}
-    <h2>{{profile.user_account.name}}</h2>
-    <img src="/{{profile.user_account.profile_photo}}" style="float: left; height: 200px;" alt="">
-    <p><span class="label">Joined:</span> {{profile.user_account.created_on}}</p>
-    <p><span class="label">Birthday:</span> {{profile.user_account.birthday}}</p>
-    <p><span class="label">Favorite color:</span> {{profile.user_account.favorite_color}}</p>
-
-    <div class="profile-about">
-        {{profile.user_account.about}}
+    {% if profile.content_type.model == "useraccount" %}
+        <h2>{{profile.subject.name}}</h2>
+        <img src="/{{profile.subject.profile_photo}}" style="float: left; height: 200px;" alt="">
+        <p><span class="label">Joined:</span> {{profile.subject.created_on}}</p>
+        <p><span class="label">Birthday:</span> {{profile.subject.birthday}}</p>
+        <p><span class="label">Favorite color:</span> {{profile.subject.favorite_color}}</p>
+        <div class="profile-about">
+            {{profile.subject.about}}
+        </div>
     </div>
-</div>
 
-<span class="label">The latest from {{profile.user_account.first_name}}:</span>
-{% for post in posts %}
-<div class="post">
-    <span id="post-{{post.id}}">
-        <span class="date">{{post.created_on}}</span>
-        </p>{{post.content}}
-    </span>
-</div>
-{% endfor %}
+    <span class="label">The latest from {{profile.subject.first_name}}:</span>
+    {% for post in posts %}
+    <div class="post">
+        <span id="post-{{post.id}}">
+            <span class="date">{{post.created_on}}</span>
+            </p>{{post.content}}
+        </span>
+    </div>
+    {% endfor %}
+    {% elif profile.content_type.model == "business" %}
+        <h2>{{profile.subject.name}}</h2>
+        <img src="/{{profile.subject.profile_photo}}" style="float: left; height: 200px;" alt="">
+        <p><span class="label">Founded on:</span> {{profile.subject.founded}}</p>
+        <p><span class="label">Founded by:</span> {{profile.subject.user}}</p>
+        <p><span class="label">Location :</span> {{profile.subject.location}}</p>
+    {% endif %}
 
 </div>
