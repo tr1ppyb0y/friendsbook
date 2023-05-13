@@ -31,7 +31,6 @@
     {% endfor %}
     {% elif profile.content_type.model == "business" %}
         <h2>{{profile.subject.name}}</h2>
-        <img src="/{{profile.subject.profile_photo}}" style="float: left; height: 200px;" alt="">
         <p><span class="label">Founded on:</span> {{profile.subject.founded}}</p>
         <p><span class="label">Founded by:</span> {{profile.subject.user}}</p>
         <p><span class="label">Location :</span> {{profile.subject.location}}</p>
