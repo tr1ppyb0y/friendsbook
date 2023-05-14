@@ -1,5 +1,5 @@
 from business.views import business_listing
-from post.views import PostList, add_post, post_detail, post_feed
+from post.views import PostList, add_post, handler_404, post_detail, post_feed
 from profilepage.views import profile_detail
 from useraccount.views import useraccount_edit
 
@@ -21,7 +21,9 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
+
+handler404 = handler_404
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,5 +33,6 @@ urlpatterns = [
     path('profile/<int:profilepage_id>', profile_detail, name='profile page'),
     path('useraccount/<int:useraccount_id>/edit', useraccount_edit, name='edit user profile'),
     path('businesses', business_listing, name='business_listing'),
-    path('postlist', PostList.as_view(), name='postlist')
+    path('postlist', PostList.as_view(), name='postlist'),
+    path('__debug__/', include('debug_toolbar.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

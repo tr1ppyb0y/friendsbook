@@ -4,7 +4,9 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
 
-<div class="header">
-    WELCOME TO FRIENDSBOOK!
-    <div class="links"><a href="/">Home Feed</a>&nbsp;|&nbsp;<a href="/businesses">Business Listing</a>&nbsp;|&nbsp;<a href="/profile/{{request.user.id}}">Your Profile</a></div>
-</div>
+<body>
+    <div class="header">
+        WELCOME TO FRIENDSBOOK!
+        <div class="links"><a href="/">Home Feed</a>&nbsp;|&nbsp;<a href="/businesses">Business Listing</a>&nbsp;|&nbsp;<a href="/profile/{{request.user.id}}">Your Profile</a></div>
+    </div>
+</body>
