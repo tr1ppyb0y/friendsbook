@@ -44,7 +44,7 @@ def post_feed(request):
     if request.method == 'POST':
         post_form = add_post(request)
     template = loader.get_template('feed.html')
-    posts = Post.objects.select_related('author')
+    posts = Post.feed_manager.get_feed(request)
     return HttpResponse(template.render({'posts': posts, 'new_post_form': post_form}, request))
 
 
