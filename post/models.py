@@ -17,3 +17,13 @@ class Post(models.Model):
 
     def __str__(self):
         return '{}: {}'.format(self.author, self.content[0:20])
+    
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, null=True, blank=True, on_delete=CASCADE)
+    author = models.ForeignKey(User, null=True, blank=True, on_delete=CASCADE)
+    content = models.CharField(max_length=140, validators=[validate_no_bad_words])
+    created_on = models.DateTimeField('date created', auto_now_add=True)
+
+    def __str__(self) -> str:
+        return f'{self.author}: {self.content[:20]}'

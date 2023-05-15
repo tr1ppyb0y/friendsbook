@@ -50,7 +50,7 @@ def post_feed(request):
 
 def post_detail(request, post_id):
     template = loader.get_template('post_detail.html')
-    post = get_object_or_404(Post, id=post_id)
+    post = get_object_or_404(Post.objects.prefetch_related('comment_set'), id=post_id)
     return HttpResponse(template.render({'post': post}, request))
 
 def add_post(request):
