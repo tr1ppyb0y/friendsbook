@@ -1,0 +1,7 @@
+{% include 'header.html' %}
+<div class="wrapper">
+    FRIENDSBOOK USERS!!!
+    {% for user in useraccounts %}
+        <li>{{ user.name }}</li>
+    {% endfor %}
+</div>

@@ -1,7 +1,7 @@
 from business.views import business_listing
 from post.views import PostList, add_post, handler_404, post_detail, post_feed
 from profilepage.views import profile_detail
-from useraccount.views import useraccount_edit
+from useraccount.views import useraccount_edit, useraccount_list
 
 """friendsbook URL Configuration
 
@@ -31,6 +31,7 @@ urlpatterns = [
     path('post/<int:post_id>', post_detail, name='post'),
     path('add_post', add_post),
     path('profile/<int:profilepage_id>', profile_detail, name='profile page'),
+    path('accountlist', useraccount_list, name='lsit user'),
     path('useraccount/<int:useraccount_id>/edit', useraccount_edit, name='edit user profile'),
     path('businesses', business_listing, name='business_listing'),
     path('postlist', PostList.as_view(), name='postlist'),
