@@ -1,4 +1,5 @@
 {% load bootstrap5 %}
+{% load translate_to_hindi %}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
 {% include 'header.html' %}
@@ -16,7 +17,7 @@
         <p><span class="label">Birthday:</span> {{profile.subject.birthday}}</p>
         <p><span class="label">Favorite color:</span> {{profile.subject.favorite_color}}</p>
             <div class="profile-about">
-                {{profile.subject.about}}
+                {{profile.subject.about | hindi_translation}}
             </div>
     </div>
 
